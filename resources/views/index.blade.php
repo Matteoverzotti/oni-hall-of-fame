@@ -8,11 +8,19 @@
 <body>
   <h1>{{$title}}</h1>
 
-  @foreach($contests as $contest)
+  @if (count($contests) == 0)
+    <h2>No contests found!</h2>
 
-    <h2><a href='/contest/{{$contest['id']}}'>{{$contest['title']}}</a></h2>
-    <p>{{$contest['location']}}</p>
+  @else
 
-  @endforeach
+    @foreach($contests as $contest)
+        <h2><a href="{{ route('contest.show', ['name_id' => $contest->name_id]) }}">{{ $contest->name }}</a></h2>
+        <p>Location: {{$contest['location']}}</p>
+        <p>Date: {{$contest['date']}}</p>
+        <p>Number of contestants: {{$contest['numberContestants']}}</p>
+
+    @endforeach
+
+  @endif
 </body>
 </html>
