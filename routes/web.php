@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Models\Contest;
+use App\Models\SubContest;
+use App\Http\Controllers\ContestController;
+use App\Http\Controllers\SubContestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +20,10 @@ use App\Models\Listing;
 Route::get('/', function () {
     return view('index', [
       'title' => 'Bine ai venit la ONI Vault!',
-      'contests' => Listing::getListings()
+      'contests' => Contest::all()
     ]);
 });
 
 
-Route::get('/contest/{id}', function($id) {
-  return view('contest', [
-    'contest' => Listing::getListingById($id)
-  ]);
-});
+Route::get('contest/{name_id}', [ContestController::class, 'show'])->name('contest.show');
+Route::get('contest/{name_id}/{subcontest_id}', [SubContestController::class, 'show'])->name('subcontest.show');
