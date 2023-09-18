@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\Contest;
 
-use Illuminate\Http\Request;
-
 class ContestController extends Controller
 {
     public function show($name_id) {
@@ -17,6 +15,6 @@ class ContestController extends Controller
         }
         
         // Pass the contest data to a view or perform other actions
-        return view('contest', ['contest' => $contest]);
+        return view('contest.show', ['contest' => $contest]);
     }
 }

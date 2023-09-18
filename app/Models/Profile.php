@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contest extends Model
+class Profile extends Model
 {
-    public function subContests() {
-        return $this->hasMany(SubContest::class, 'contest_id');
+    public function contestants() {
+        return $this->hasMany(Contestant::class, 'profile_id');
     }
     use HasFactory;
 }

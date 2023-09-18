@@ -15,10 +15,6 @@
 
     @foreach($contests as $contest)
         <h2><a href="{{ route('contest.show', ['name_id' => $contest->name_id]) }}">{{ $contest->name }}</a></h2>
-        <p>Location: {{$contest['location']}}</p>
-        <p>Date: {{$contest['date']}}</p>
-        <p>Number of contestants: {{$contest['numberContestants']}}</p>
-
     @endforeach
 
   @endif

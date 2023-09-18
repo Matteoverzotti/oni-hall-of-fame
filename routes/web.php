@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Contest;
-use App\Models\SubContest;
 use App\Http\Controllers\ContestController;
 use App\Http\Controllers\SubContestController;
+use App\Http\Controllers\ProfileController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('contest/{name_id}', [ContestController::class, 'show'])->name('contest.show');
-Route::get('contest/{name_id}/{subcontest_id}', [SubContestController::class, 'show'])->name('subcontest.show');
+Route::get('/contest/{name_id}', [ContestController::class, 'show'])->name('contest.show');
+Route::get('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'show'])->name('sub_contest.show');
+
+Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');

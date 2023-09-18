@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub_contests', function (Blueprint $table) {
+        Schema::create('contests', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            
+            // Contestname and slug name
             $table->string('name_id')->unique();
-            $table->unsignedBigInteger('contest_id');
+            $table->string('name');
             $table->timestamps();
-    
-            $table->foreign('contest_id')->references('id')->on('contests')->onDelete('cascade');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub_contests');
+        Schema::dropIfExists('contests');
     }
 };
