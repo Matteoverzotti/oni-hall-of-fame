@@ -18,22 +18,8 @@ class ContestantFactory extends Factory
      */
     public function definition(): array
     {
-        $contestantName = fake()->name();
-
-        // Try to find an existing profile with the same name
-        $profile = Profile::where('name', $contestantName)->first();
-
-        if (!$profile) {
-            // Create a new one
-            $profile = Profile::factory()->create([
-                'name' => $contestantName
-            ]);
-        }
-
         return [
-            'sub_contest_id' => SubContest::inRandomOrder()->first(),
-            'profile_id' => $profile->id,
-            'name' => $contestantName
+            'sub_contest_id' => SubContest::inRandomOrder()->first()
         ];
     }
 }
