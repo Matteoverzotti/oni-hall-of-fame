@@ -15,6 +15,6 @@ class ContestController extends Controller
         }
         
         // Pass the contest data to a view or perform other actions
-        return view('contest.show', ['contest' => $contest]);
+        return view('contests.show', ['contest' => $contest]);
     }
 }

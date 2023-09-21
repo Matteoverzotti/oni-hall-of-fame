@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Contestant;
 use App\Models\Profile;
+use App\Models\SubContest;
 
 class ContestantSeeder extends Seeder
 {
@@ -15,8 +16,7 @@ class ContestantSeeder extends Seeder
     public function run(): void
     {
         // Specify the user (contestant) name
-        // $userName = fake()->name();
-        $userName = 'Bradley Nicolas';
+        $userName = fake()->name();
 
         // Try to find an existing profile with the same name
         $profile = Profile::where('name', $userName)->first();
@@ -30,7 +30,7 @@ class ContestantSeeder extends Seeder
 
         Contestant::factory()->create([
             'name' => $userName,
-            'sub_contest_id' => 5, // Use the desired contest ID
+            'sub_contest_id' => SubContest::inRandomOrder()->first()->id,
             'profile_id' => $profile->id,
         ]);
     }

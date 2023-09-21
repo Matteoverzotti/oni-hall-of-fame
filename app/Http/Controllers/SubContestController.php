@@ -25,6 +25,6 @@ class SubContestController extends Controller
         }
     
         // Pass the contest and sub_contest data to a view or perform other actions
-        return view('sub_contest.show', ['contest' => $contest, 'sub_contest' => $sub_contest]);
+        return view('sub_contests.show', ['contest' => $contest, 'sub_contest' => $sub_contest]);
     }
 }

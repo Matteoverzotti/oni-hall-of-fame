@@ -26,7 +26,10 @@ Route::get('/', function () {
 });
 
 
-Route::get('/contest/{name_id}', [ContestController::class, 'show'])->name('contest.show');
-Route::get('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'show'])->name('sub_contest.show');
+// Contest Routes
+Route::get('/contest/{name_id}', [ContestController::class, 'show'])->name('contests.show');
+Route::get('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'show'])->name('sub_contests.show');
 
-Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+// Profile Routes
+Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index');
+Route::get('profile/{id}', [ProfileController::class, 'show'])->name('profiles.show');
