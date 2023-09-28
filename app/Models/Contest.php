@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contest extends Model
 {
+    use HasFactory;
+
     public function subContests() {
         return $this->hasMany(SubContest::class, 'contest_id');
     }
-    use HasFactory;
 }

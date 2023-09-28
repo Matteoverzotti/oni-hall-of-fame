@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contestant extends Model
 {
+    use HasFactory;
+    
     public function subContest() {
         return $this->belongsTo(SubContest::class, 'sub_contest_id');
     }
@@ -14,5 +16,4 @@ class Contestant extends Model
     public function profile() {
         return $this->hasOne(Profile::class);
     }
-    use HasFactory;
 }

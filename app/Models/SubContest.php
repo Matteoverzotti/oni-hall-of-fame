@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubContest extends Model
 {
+    use HasFactory;
+
     public function contest() {
         return $this->belongsTo(Contest::class);
     }
@@ -14,5 +16,4 @@ class SubContest extends Model
     public function contestants() {
         return $this->hasMany(Contestant::class)->orderBy('place');
     }
-    use HasFactory;
 }

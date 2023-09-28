@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    use HasFactory;
+    
     public function contestants() {
         return $this->hasMany(Contestant::class, 'profile_id');
     }
-    use HasFactory;
 }

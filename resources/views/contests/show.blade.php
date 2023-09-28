@@ -1,4 +1,5 @@
 @include('partials._navbar')
+{{-- @vite('resources/css/app.css') --}}
 
 <h2>{{ $contest->name }}</h2>
 <p>{{ $contest->location }}</p>
