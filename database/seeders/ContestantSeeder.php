@@ -15,23 +15,24 @@ class ContestantSeeder extends Seeder
      */
     public function run(): void
     {
-        // Specify the user (contestant) name
-        $userName = fake()->name();
+        for ($i = 0; $i < 50; $i++) {
+            // Specify the user (contestant) name
+            $userName = fake()->name();
 
-        // Try to find an existing profile with the same name
-        $profile = Profile::where('name', $userName)->first();
+            // Try to find an existing profile with the same name
+            $profile = Profile::where('name', $userName)->first();
 
-        if (!$profile) {
-            // Create a new profile
-            $profile = Profile::factory()->create([
-                'name' => $userName
+            if (!$profile) {
+                // Create a new profile
+                $profile = Profile::factory()->create([
+                    'name' => $userName
+                ]);
+            }
+
+            Contestant::factory()->create([
+                'name' => $userName,
+                'profile_id' => $profile->id,
             ]);
         }
-
-        Contestant::factory()->create([
-            'name' => $userName,
-            'sub_contest_id' => SubContest::inRandomOrder()->first()->id,
-            'profile_id' => $profile->id,
-        ]);
     }
 }

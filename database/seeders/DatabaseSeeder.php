@@ -15,10 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create a Contest using the ContestFactory
-        // Contest::factory()->count(7)->create();
-        // SubContest::factory(10)->create();
-        // Contestant::factory()->count(30)->create();
-
-
+        Contest::factory()->count(7)->create();
+        SubContest::factory(10)->create();
     }
 }

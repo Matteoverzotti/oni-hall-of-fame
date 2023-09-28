@@ -12,7 +12,7 @@ class SubContest extends Model
     }
     
     public function contestants() {
-        return $this->hasMany(Contestant::class);
+        return $this->hasMany(Contestant::class)->orderBy('place');
     }
     use HasFactory;
 }

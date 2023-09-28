@@ -18,15 +18,14 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('index', [
-      'title' => 'Bine ai venit la ONI Vault!',
-      'contests' => Contest::all()
+        'contests' => Contest::orderByDesc('date')->take(5)->get()
     ]);
 });
 
-
 // Contest Routes
+Route::get('/contests', [ContestController::class, 'index'])->name('contests.index');
 Route::get('/contest/{name_id}', [ContestController::class, 'show'])->name('contests.show');
 Route::get('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'show'])->name('sub_contests.show');
 

@@ -23,6 +23,8 @@ class ContestFactory extends Factory
         return [
             'name' => $name,
             'name_id' => $name_id,
+            'location' => fake()->country(),
+            'date' => fake()->date()
         ];
     }
 }

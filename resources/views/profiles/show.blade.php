@@ -1,6 +1,7 @@
 @include('partials._navbar')
+
 <h1>{{ $profile->name }}</h1>
-<p>{{ $profile->email }}</p>
+<p>Graduation Year: {{ $profile->graduation_year }}</p>
 
 <h2>Participations:</h2>
 <ul>

@@ -14,9 +14,13 @@ return new class extends Migration
         Schema::create('contests', function (Blueprint $table) {
             $table->id();
             
-            // Contestname and slug name
+            // Contest name and slug name
             $table->string('name_id')->unique();
             $table->string('name');
+
+            // Contest location and date
+            $table->string('location');
+            $table->string('date');
             $table->timestamps();
         });
     }

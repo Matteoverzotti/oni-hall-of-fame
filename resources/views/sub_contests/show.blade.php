@@ -6,9 +6,28 @@
 
 <h2>Participants</h2>
 <ul>
-    @foreach ($sub_contest->contestants as $contestant)
-        <li>
-            <a href="{{ route('profiles.show', ['id' => $contestant->profile_id]) }}">{{ $contestant->name }}</a>
-        </li>
-    @endforeach
+    <table>
+        <thead>
+            <tr>
+                <th>Loc</th>
+                <th>Nume</th>
+                <th>Echipă</th>
+                <th>Județ</th>
+                <th>Medalie</th>
+                <th>Premiu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($sub_contest->contestants as $contestant)
+                <tr>
+                    <td>{{$contestant->place}}</td>
+                    <td><a href="{{ route('profiles.show', ['id' => $contestant->profile_id]) }}">{{ $contestant->name }}</td>
+                    <td>{{$contestant->team}}</td>
+                    <td>{{$contestant->region}}</td>
+                    <td>{{$contestant->medal}}</td>
+                    <td>{{$contestant->prize}}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </ul>

@@ -19,7 +19,18 @@ class ContestantFactory extends Factory
     public function definition(): array
     {
         return [
-            'sub_contest_id' => SubContest::inRandomOrder()->first()
+            'sub_contest_id' => SubContest::inRandomOrder()->first()->id,
+            'place' => fake()->randomNumber(),
+            'team' => 'Romania',
+            'region' => fake()->city(),
+            'medal' => collect(["Aur", "Argint", "Bronz"])->random(),
+            'prize' => collect([
+                "Premiul 1",
+                "Premiul 2",
+                "Premiul 3",
+                "Mențiune",
+                "Mențiune Specială"
+            ])->random()
         ];
     }
 }
