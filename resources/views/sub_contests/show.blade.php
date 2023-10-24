@@ -18,14 +18,14 @@
     </thead>
     <tbody>
         @foreach ($sub_contest->contestants as $contestant)
-            <tr>
-                <td>{{$contestant->place}}</td>
-                <td><a href="{{ route('profiles.show', ['id' => $contestant->profile_id]) }}">{{ $contestant->name }}</td>
-                <td>{{$contestant->team}}</td>
-                <td>{{$contestant->region}}</td>
-                <td>{{$contestant->medal}}</td>
-                <td>{{$contestant->prize}}</td>
-            </tr>
+        <tr>
+            <td>{{$contestant->place}}</td>
+            <td><a href="{{ route('profiles.show', ['id' => $contestant->profile_id]) }}">{{ $contestant->name }}</td>
+            <td>{{$contestant->team}}</td>
+            <td>{{$contestant->region}}</td>
+            <td>{{$contestant->medal}}</td>
+            <td>{{$contestant->prize}}</td>
+        </tr>
         @endforeach
     </tbody>
 </table>
