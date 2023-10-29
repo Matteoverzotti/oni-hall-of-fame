@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\Contest;
+use App\Models\SubContest;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ContestController extends Controller
 {
@@ -33,18 +35,49 @@ class ContestController extends Controller
     // Store listing data
     public function store(Request $request) {
         // dd($request->all());
-        $formFields = $request->validate([
+        $contestRules = [
             'name' => 'required',
             'location' => 'required',
             'date' => ['required', 'date'],
-        ]);
+        ];
 
+        $subContestRules = [
+            'subcontests.*' => 'required',
+        ];
+
+        $rules = array_merge($contestRules, $subContestRules);
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Handle duplicate entry error
         try {
-            Contest::create($formFields);
-            return redirect('/')->with('message', 'Contest created successfully!');
+            $contest = Contest::create([
+                'name' => $request->input('name'),
+                'location' => $request->input('location'),
+                'date' => $request->input('date'),
+            ]);
         } catch (QueryException $e) {
-            // Handle duplicate entry error
             return redirect()->back()->withErrors(['name' => 'A contest with this name already exists.'])->withInput();
         }
+
+        if ($request->has('subcontests')) {
+            $subContestData = $request->input('subcontests');
+
+            foreach ($subContestData as $subContestName) {
+                $contest->subcontests()->create([
+                    'name' => $subContestName,
+                    'location' => $contest->location,
+                    'date' => $contest->date,
+                ]);
+            }
+        }
+
+        return redirect('/')->with('success', 'Contest created successfully!');
     }
 }

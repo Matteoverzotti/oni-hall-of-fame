@@ -26,3 +26,10 @@
 </table>
 
 @endif
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<a href="/contests/create">Create contest</a>
