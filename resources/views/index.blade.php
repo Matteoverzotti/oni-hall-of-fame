@@ -17,7 +17,7 @@
 
     <div class="flex flex-col items-center min-h-screen">
     {{-- Two columns div --}}
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 p-10">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 p-36">
             {{-- First column --}}
             <div>
                 <p
