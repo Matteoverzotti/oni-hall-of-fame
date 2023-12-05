@@ -13,7 +13,7 @@
 @else
         <div class="relative mx-auto w-3/4 overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <x-th>
                         Nume
@@ -32,11 +32,12 @@
                 @foreach ($contests as $contest)
                 <x-tr>
                     <x-td><a
-                        href="{{ route('contests.show', ['name_id' => $contest->name_id]) }}">{{ $contest->name }}</a></x-td>
-                        <x-td>{{ $contest->location }}</x-td>
-                        <x-td>{{ $contest->date }}</x-td>
-                    </x-tr>
-                    @endforeach
+                        href="{{ route('contests.show', ['name_id' => $contest->name_id]) }}">{{ $contest->name }}</a>
+                    </x-td>
+                    <x-td>{{ $contest->location }}</x-td>
+                    <x-td>{{ $contest->date }}</x-td>
+                </x-tr>
+                @endforeach
                 </tbody>
             </table>
         </div>

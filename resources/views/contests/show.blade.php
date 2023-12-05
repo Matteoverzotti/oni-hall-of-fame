@@ -16,3 +16,12 @@
     </li>
     @endforeach
 </ul>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<a href="/contest/{{ $contest->name_id }}/edit">Edit contest</a>
