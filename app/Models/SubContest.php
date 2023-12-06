@@ -13,16 +13,18 @@ class SubContest extends Model
     protected $fillable = ['name', 'location', 'date'];
 
     // Mutators
-    public function setNameAttribute($value) {
+    public function setNameAttribute($value): void {
         $this->attributes['name'] = $value;
-        $this->attributes['name_id'] = Str::uuid();
+
+        if (!isset($this->attributes['name_id']))
+            $this->attributes['name_id'] = Str::uuid();
     }
 
     // Database Relations
     public function contest() {
         return $this->belongsTo(Contest::class);
     }
-    
+
     public function contestants() {
         return $this->hasMany(Contestant::class)->orderBy('place');
     }

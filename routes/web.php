@@ -18,21 +18,22 @@ use App\Http\Controllers\ProfileController;
 |
 */
 
-Route::get('/', function() {
-    return view('index', [
-        'contests' => Contest::orderByDesc('date')->take(5)->get()
-    ]);
-});
-
 // Contest Routes
 Route::get('/contests', [ContestController::class, 'index'])->name('contests.index');
 
-// Create/Edit Contest
+// Create Contest
 Route::get('/contests/create', [ContestController::class, 'create'])->name('contests.create');
-Route::get('/contest/{name_id}/edit', [ContestController::class, 'edit'])->name('contests.edit');
-
 Route::post('/contests', [ContestController::class, 'store'])->name('contests.store');
+
+// Edit Contest
+Route::get('/contest/{name_id}/edit', [ContestController::class, 'edit'])->name('contests.edit');
 Route::put('/contest/{name_id}', [ContestController::class, 'update'])->name('contests.update');
+
+// Delete Contest
+Route::delete('/contest/{name_id}', [ContestController::class, 'destroy'])->name('contests.destroy');
+
+// Delete SubContest
+Route::delete('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'destroy'])->name('sub_contests.destroy');
 
 // Show contests
 Route::get('/contest/{name_id}', [ContestController::class, 'show'])->name('contests.show');
@@ -41,3 +42,9 @@ Route::get('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::cl
 // Profile Routes
 Route::get('/profiles', [ProfileController::class, 'index'])->name('profiles.index');
 Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profiles.show');
+
+Route::get('/', function() {
+    return view('index', [
+        'contests' => Contest::orderByDesc('date')->take(5)->get()
+    ]);
+});

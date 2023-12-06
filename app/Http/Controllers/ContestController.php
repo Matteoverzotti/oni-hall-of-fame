@@ -55,10 +55,10 @@ class ContestController extends Controller
         $subContestRules = [
             'subcontests.*' => 'required',
         ];
-        
+
         $rules = array_merge($contestRules, $subContestRules);
         $validator = Validator::make(request()->all(), $rules);
-        
+
         if ($validator->fails()) {
             return redirect()
             ->back()
@@ -79,22 +79,17 @@ class ContestController extends Controller
 
         if (request()->has('subcontests')) {
             $subContestData = request()->input('subcontests');
-            
+
             if (count($subContestData) !== count(array_unique($subContestData))) {
                 return redirect()->back()->withErrors(['subcontests' => 'Subcontest names must be unique.'])->withInput();
             }
 
             // Update existing subcontests if they exist
-            foreach ($subContestData as $subContestName) {
-                $subContest = $contest->subcontests()->where('name', $subContestName)->first();
-
-                if ($subContest) {
-                    $subContest->update([
-                        'name' => $subContestName,
-                        'location' => $contest->location,
-                        'date' => $contest->date,
-                    ]);
-                }
+            $previousSubcontests = $contest->subcontests()->get();
+            for ($i = 0; $i < count($previousSubcontests); $i++) {
+                $previousSubcontests[$i]->update([
+                    'name' => $subContestData[$i],
+                ]);
             }
 
             foreach ($subContestData as $subContestName) {
@@ -111,7 +106,7 @@ class ContestController extends Controller
             }
         }
 
-        return back()->with('success', 'Contest updated successfully!');
+        return redirect("/contest/{$contest_name}")->with('success', 'Contest updated successfully!');
     }
 
     // Store listing data
@@ -122,8 +117,9 @@ class ContestController extends Controller
             'date' => ['required', 'date'],
         ];
 
+        // make the subcontests name unique
         $subContestRules = [
-            'subcontests.*' => 'required|unique:sub_contests,name',
+            'subcontests.*' => 'required',
         ];
 
         $rules = array_merge($contestRules, $subContestRules);
@@ -150,6 +146,10 @@ class ContestController extends Controller
         if ($request->has('subcontests')) {
             $subContestData = $request->input('subcontests');
 
+            if (count($subContestData) !== count(array_unique($subContestData))) {
+                return redirect()->back()->withErrors(['subcontests' => 'Subcontest names must be unique.'])->withInput();
+            }
+
             foreach ($subContestData as $subContestName) {
                 $contest->subcontests()->create([
                     'name' => $subContestName,
@@ -160,5 +160,20 @@ class ContestController extends Controller
         }
 
         return redirect('/')->with('success', 'Contest created successfully!');
+    }
+
+    public function destroy($contest_name) {
+        $contest = Contest::where('name_id', $contest_name)->first();
+
+        if (!$contest)
+            abort(404);
+
+        try {
+            $contest->delete();
+        } catch (QueryException $e) {
+            return redirect()->back()->with('error', 'Error deleting contest! Have you deleted all subcontests?');
+        }
+
+        return redirect('/')->with('success', 'Contest deleted successfully!');
     }
 }

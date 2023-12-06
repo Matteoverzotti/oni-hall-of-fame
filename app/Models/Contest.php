@@ -16,7 +16,7 @@ class Contest extends Model
         'date'
     ];
 
-    public function setNameAttribute($value) {
+    public function setNameAttribute($value): void {
         $this->attributes['name'] = $value;
         $this->attributes['name_id'] = Str::slug($value);
     }
