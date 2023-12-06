@@ -8,86 +8,64 @@
 <form method="POST" action="/contests">
     @csrf
     <div class="px-64 flex justify-center">
-        <div class="w-1/3 mb-6">
-            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nume
-                concurs</label>
-            <input type="text" name="name"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value="{{ old('name') }}" required>
-        </div>
 
-        @error('name')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
+        {{-- Nume concurs --}}
+        <div class="w-1/3 mb-6">
+            <x-input label="Nume concurs" name="name" value="{{ old('name') }}"/>
+            @error('name')
+            <x-error-message :name="old('name')"/> @enderror
+        </div>
 
         @if (session('error'))
             <div class="text-red-500 text-xs mt-1">{{ session('error') }}</div>
         @endif
 
-        <br>
-
+        {{-- Locație concurs --}}
         <div class="w-1/3 mb-6">
-            <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Locație
-                concurs</label>
-            <input type="text" name="location"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-10% p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value="{{ old('location') }}" required>
+            <x-input label="Locație concurs" name="location" value="{{  old('location') }}"/>
+            @error('location')
+            <x-error-message :name="old('location')"/> @enderror
         </div>
 
-        @error('location')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
-
-        <br>
-
+        {{-- Dată Concurs --}}
         <div class="w-1/3 mb-6">
-            <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dată
-                concurs</label>
-            <input type="text" name="date"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-10% p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                value="{{ old('date') }}" placeholder="Format: YYYY-MM-DD" required>
+            <x-input label="Dată Concurs" name="date" value="{{ old('date') }}" placeholder="Format: YYYY-MM-DD"/>
+            @error('date')
+            <x-error-message :name="old('date')"/> @enderror
         </div>
-
-        @error('date')
-            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
     </div>
-
-    <br>
-    <br>
-    <br>
 
     <div id="subcontests"></div>
-    <button type="button" id="add-subcontest-button">Add a New Subcontest</button>
+    @error('subcontests')
+    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+    @enderror
+    <button type="button" id="add-subcontest-button" class="mb-4 text-blue-700">Add a New Subcontest</button>
 
     <div class="mb-6">
-        <button type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-
+        <x-button type="submit"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Submit
+        </x-button>
     </div>
+
 </form>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const subcontestsContainer = document.getElementById('subcontests');
         const addSubcontestButton = document.getElementById('add-subcontest-button');
         let subcontestCount = 0;
 
-        addSubcontestButton.addEventListener('click', function() {
+        addSubcontestButton.addEventListener('click', function () {
             ++subcontestCount;
 
-            const subcontestLabel = document.createElement('label');
-            subcontestLabel.textContent = `Subcontest ${subcontestCount} name`;
-            subcontestsContainer.appendChild(subcontestLabel);
-
-            const subcontestInput = document.createElement('input');
-            subcontestInput.setAttribute('type', 'text');
-            subcontestInput.setAttribute('name', 'subcontests[]');
-
+            const subcontestInput = document.createElement('div');
+            subcontestInput.innerHTML = `
+                <x-input label="Subcontest ${subcontestCount} name" name="subcontests[]" value=""/>
+            `;
             subcontestsContainer.appendChild(subcontestInput);
 
-            const lineBreak = document.createElement('br');
-            subcontestsContainer.appendChild(lineBreak);
         });
     });
 </script>
+
