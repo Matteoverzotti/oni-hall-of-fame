@@ -32,6 +32,10 @@ Route::put('/contest/{name_id}', [ContestController::class, 'update'])->name('co
 // Delete Contest
 Route::delete('/contest/{name_id}', [ContestController::class, 'destroy'])->name('contests.destroy');
 
+// Edit SubContest
+Route::get('/contest/{name_id}/{sub_contest_name_id}/edit', [SubContestController::class, 'edit'])->name('sub_contests.edit');
+Route::put('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'update'])->name('sub_contests.update');
+
 // Delete SubContest
 Route::delete('/contest/{name_id}/{sub_contest_name_id}', [SubContestController::class, 'destroy'])->name('sub_contests.destroy');
 
