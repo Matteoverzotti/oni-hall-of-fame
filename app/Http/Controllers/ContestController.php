@@ -40,7 +40,6 @@ class ContestController extends Controller
 
     // Update listing data
     public function update($contest_name) {
-        // dd(request()->input());
         $contest = Contest::where('name_id', $contest_name)->first();
 
         if (!$contest)
@@ -106,7 +105,7 @@ class ContestController extends Controller
             }
         }
 
-        return redirect("/contest/{$contest_name}")->with('success', 'Contest updated successfully!');
+        return redirect("/contest/" . request()->input('name'))->with('success', 'Contest updated successfully!');
     }
 
     // Store listing data
