@@ -17,10 +17,13 @@
         </div>
     </div>
 
-{{--    <div class="px-64 flex justify-center">--}}
-{{--        --}}{{-- File Upload --}}
-{{--        <input type="file" name="csvFile" accept=".csv">--}}
-{{--    </div>--}}
+    <div class="px-64 flex justify-center">
+         File Upload
+        <input type="file" name="csvFile" accept=".csv" id="csvFile" onchange="previewCSV()">
+    </div>
+
+    <!-- Display CSV preview -->
+    <div id="csvPreview" class="px-64 mb-6"></div>
 
     <div class="mb-6">
         <x-button type="submit"
@@ -30,22 +33,54 @@
     </div>
 </form>
 
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const subcontestsContainer = document.getElementById('subcontests');
-        const addSubcontestButton = document.getElementById('add-subcontest-button');
-        let subcontestCount = {{ $contest->subContests->count() }};
+    function previewCSV() {
+        const fileInput = document.getElementById('csvFile');
+        const previewContainer = document.getElementById('csvPreview');
 
-        addSubcontestButton.addEventListener('click', function () {
-            ++subcontestCount;
+        const file = fileInput.files[0];
 
-            const subcontestInput = document.createElement('div');
-            subcontestInput.innerHTML = `
-                <x-input label="Subcontest ${subcontestCount} name" name="subcontests[]" value=""/>
-            `;
-            subcontestsContainer.appendChild(subcontestInput);
+        if (file) {
+            const reader = new FileReader();
 
-        });
-    });
+            reader.onload = function (e) {
+                const csvContent = e.target.result;
+                const csvRows = csvContent.split(/\r\n|\n/);
+                const headers = csvRows[0].split(',');
+
+                const table = document.createElement('table');
+                table.classList.add('table', 'border', 'border-collapse', 'w-full');
+
+                // Create table headers
+                const headerRow = document.createElement('tr');
+                headers.forEach(header => {
+                    const th = document.createElement('th');
+                    th.textContent = header;
+                    headerRow.appendChild(th);
+                });
+                table.appendChild(headerRow);
+
+                // Create table rows
+                for (let i = 1; i < csvRows.length; i++) {
+                    const row = document.createElement('tr');
+                    const columns = csvRows[i].split(',');
+
+                    columns.forEach(column => {
+                        const td = document.createElement('td');
+                        td.textContent = column;
+                        row.appendChild(td);
+                    });
+
+                    table.appendChild(row);
+                }
+
+                previewContainer.innerHTML = '<strong>CSV Preview:</strong><br>';
+                previewContainer.appendChild(table);
+            };
+
+            reader.readAsText(file);
+        } else {
+            previewContainer.innerHTML = ''; // Clear the preview if no file selected
+        }
+    }
 </script>
