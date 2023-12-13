@@ -105,7 +105,7 @@ class ContestController extends Controller
             }
         }
 
-        return redirect("/contest/" . request()->input('name'))->with('success', 'Contest updated successfully!');
+        return redirect("/contest/{$contest->name_id}")->with('success', 'Contest updated successfully!');
     }
 
     // Store listing data

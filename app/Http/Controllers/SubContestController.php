@@ -75,6 +75,6 @@ class SubContestController extends Controller
             'name' => request()->input('name'),
         ]);
 
-        return redirect("/contest/{$contest->name}/{$sub_contest->name_id}")->with('success', 'Subcontest updated successfully!');
+        return redirect("/contest/{$contest->name_id}/{$sub_contest->name_id}")->with('success', 'Subcontest updated successfully!');
     }
 }
