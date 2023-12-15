@@ -5,7 +5,6 @@ use App\Models\SubContest;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Whoops\Handler\PlainTextHandler;
 
 return new class extends Migration
 {

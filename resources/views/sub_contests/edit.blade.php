@@ -19,11 +19,12 @@
 
     <div class="px-64 flex justify-center">
          File Upload
-        <input type="file" name="csvFile" accept=".csv" id="csvFile" onchange="previewCSV()">
+        <input type="file" name="ranking" accept=".csv" id="ranking" onchange="previewCSV()">
     </div>
 
     <!-- Display CSV preview -->
-    <div id="csvPreview" class="px-64 mb-6"></div>
+{{--    TODO: Make it consistent with table component--}}
+    <div id="rankingPreview" class="px-64 mb-6"></div>
 
     <div class="mb-6">
         <x-button type="submit"
@@ -35,8 +36,8 @@
 
 <script>
     function previewCSV() {
-        const fileInput = document.getElementById('csvFile');
-        const previewContainer = document.getElementById('csvPreview');
+        const fileInput = document.getElementById('ranking');
+        const previewContainer = document.getElementById('rankingPreview');
 
         const file = fileInput.files[0];
 
@@ -74,7 +75,7 @@
                     table.appendChild(row);
                 }
 
-                previewContainer.innerHTML = '<strong>CSV Preview:</strong><br>';
+                previewContainer.innerHTML = '<strong>Ranking Preview:</strong><br>';
                 previewContainer.appendChild(table);
             };
 

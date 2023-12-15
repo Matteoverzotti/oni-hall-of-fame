@@ -4,29 +4,41 @@
 <p>{{ $sub_contest->location }}</p>
 <p>{{ $sub_contest->date }}</p>
 
+@php
+    $rankingJson = $sub_contest->rankings()->get()->first()->data;
+    $rankingArray = json_decode($rankingJson, true);
+@endphp
+
 <h2>Participants</h2>
 <table>
     <thead>
-        <tr>
-            <th>Loc</th>
-            <th>Nume</th>
-            <th>Echipă</th>
-            <th>Județ</th>
-            <th>Medalie</th>
-            <th>Premiu</th>
-        </tr>
+    <x-tr>
+        @foreach($rankingArray[0] as $headerCol)
+            <x-th>{{ $headerCol }}</x-th>
+        @endforeach
+    </x-tr>
     </thead>
     <tbody>
-        @foreach ($sub_contest->contestants as $contestant)
-        <tr>
-            <td>{{$contestant->place}}</td>
-            <td><a href="{{ route('profiles.show', ['id' => $contestant->profile_id]) }}">{{ $contestant->name }}</td>
-            <td>{{$contestant->team}}</td>
-            <td>{{$contestant->region}}</td>
-            <td>{{$contestant->medal}}</td>
-            <td>{{$contestant->prize}}</td>
-        </tr>
-        @endforeach
+    @foreach($rankingArray as $line => $value)
+        @if ($line == 0)
+            @continue
+        @endif
+        <x-tr>
+            @foreach($value as $col)
+                <x-td>{{ $col }}</x-td>
+            @endforeach
+        </x-tr>
+    @endforeach
+{{--        @foreach ($sub_contest->contestants as $contestant)--}}
+{{--            <x-tr>--}}
+{{--                <x-td>{{$contestant->place}}</x-td>--}}
+{{--                <x-td><a href="{{ route('profiles.show', ['id' => $contestant->profile_id]) }}">{{ $contestant->name }}</x-td>--}}
+{{--                <x-td>{{$contestant->team}}</x-td>--}}
+{{--                <x-td>{{$contestant->region}}</x-td>--}}
+{{--                <x-td>{{$contestant->medal}}</x-td>--}}
+{{--                <x-td>{{$contestant->prize}}</x-td>--}}
+{{--            </x-tr>--}}
+{{--        @endforeach--}}
     </tbody>
 </table>
 
@@ -43,7 +55,8 @@
     @csrf
     @method('DELETE')
     <x-button type="submit"
-              class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+              class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+              onclick="return confirm('Are you sure you want to delete this subcontest?')">
         Delete sub-contest
     </x-button>
 </form>

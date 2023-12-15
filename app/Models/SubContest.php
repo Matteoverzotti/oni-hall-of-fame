@@ -28,4 +28,8 @@ class SubContest extends Model
     public function contestants() {
         return $this->hasMany(Contestant::class)->orderBy('place');
     }
+
+    public function rankings() {
+        return $this->hasOne(Ranking::class);
+    }
 }
