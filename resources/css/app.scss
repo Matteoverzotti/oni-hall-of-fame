@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "buttons";
+@import "tables";
+
+h1 {
+    @apply mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900
+            md:text-5xl lg:text-6xl dark:text-white
+}
+
+h2 {
+    @apply mb-4 text-6xl text-center font-extrabold leading-none tracking-tight text-gray-900
+            md:text-6xl lg:text-6xl dark:text-white
+}
+
+a {
+    @apply font-medium text-blue-600 dark:text-blue-500 hover:underline
+}
