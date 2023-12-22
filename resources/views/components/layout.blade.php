@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro">
 
 <head>
     <meta charset="utf-8">
@@ -14,10 +14,16 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
+    <title>ONI Vault</title>
 
 </head>
 
-<body class="bg-white dark:bg-gray-900">
-    <x-flash-message/>
-    {{ $slot }}
+<body class="flex flex-col min-h-screen bg-white dark:bg-gray-900">
+    <main class="flex-1">
+        @include('partials._navbar')
+        <x-flash-message/>
+        {{ $slot }}
+    </main>
+
+    @include('partials._footer')
 </body>
