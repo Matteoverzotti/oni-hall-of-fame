@@ -23,6 +23,9 @@ class SubContestController extends Controller
         return [$contest, $sub_contest];
     }
 
+    // TODO: Add mapping for the sub_contest to contestants
+    // On update/delete, must remake the mapping
+
     public function show($name_id, $sub_contest_id) {
         [$contest, $sub_contest] = $this->getSubContest($name_id, $sub_contest_id);
         return view('sub_contests.show', ['contest' => $contest, 'sub_contest' => $sub_contest]);

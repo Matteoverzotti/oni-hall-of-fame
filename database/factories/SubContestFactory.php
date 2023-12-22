@@ -2,13 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\SubContest;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 use \App\Models\Contest;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SubContest>
+ * @extends Factory<SubContest>
  */
 class SubContestFactory extends Factory
 {

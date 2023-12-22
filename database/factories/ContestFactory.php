@@ -2,11 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Contest;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Listing>
+ * @extends Factory<Contest>
  */
 class ContestFactory extends Factory
 {
