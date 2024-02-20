@@ -13,6 +13,10 @@
                 <td>{{ $contest->date }}</td>
             </tr>
             <tr>
+                <td>Regiune:</td>
+                <td>{{ $contest->international ? 'Internațional' : 'Național' }}</td>
+            </tr>
+            <tr>
                 <td>SubContests:</td>
                 <td>
                     <ul>
