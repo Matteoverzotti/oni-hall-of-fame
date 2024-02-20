@@ -9,11 +9,11 @@ use Illuminate\Support\Str;
 class Contest extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'name',
         'location',
-        'date'
+        'date',
+        'international',
     ];
 
     public function setNameAttribute($value): void {

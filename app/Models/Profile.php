@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
-    
+
+    protected $fillable = ['name', 'email', 'graduation_year'];
     public function contestants() {
         return $this->hasMany(Contestant::class, 'profile_id');
     }

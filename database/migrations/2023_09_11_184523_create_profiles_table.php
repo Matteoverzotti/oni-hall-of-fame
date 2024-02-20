@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('email')->unique();
-            $table->integer('graduation_year');
+//            $table->string('email')->unique();
+            $table->integer('graduation_year')->default(0);
             $table->timestamps();
         });
     }

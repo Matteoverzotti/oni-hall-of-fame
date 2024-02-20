@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Contest;
 
+use App\Models\Profile;
 use App\Models\Ranking;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -37,9 +38,11 @@ class SubContestController extends Controller
 
         // Delete the sub_contest
         try {
+            // Delete the contestants
+            $sub_contest->contestants()->delete();
             $sub_contest->delete();
         } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'Error deleting subcontest');
+            return redirect()->back()->with('error', $e->getMessage());
         }
 
         return redirect()
@@ -84,9 +87,31 @@ class SubContestController extends Controller
              $rankingModel->data = json_encode($this->parseCsv($ranking_csv->getRealPath()));
              $rankingModel->save();
 
-
             // Associate the ranking with the sub_contest
             $sub_contest->rankings()->save($rankingModel);
+
+            // For each contestant in the ranking, associate it with a profile (or create one)
+            $ranking = json_decode($rankingModel->data);
+            foreach ($ranking as $index => $row) {
+                $profile = Profile::where('name', $row[0])->first();
+                if (!$profile) {
+                    $profile = Profile::create([
+                        'name' => $row[0],
+                    ]);
+                }
+
+                // print something to the js console
+                echo "<script>console.log(`$profile->id`)</script>";
+                $sub_contest->contestants()->create([
+                    'name' => $row[0],
+                    'profile_id' => $profile->id,
+                    'place' => $index + 1,
+                    'team' => 'RO',
+                    'region' => 'RO',
+                    'medal' => 'Gold',
+                    'prize' => 'Gold',
+                ]);
+            }
         }
 
         return redirect("/contest/{$contest->name_id}/{$sub_contest->name_id}")->with('success', 'Subcontest updated successfully!');
