@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Contest;
-use App\Models\SubContest;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class ContestController extends Controller
@@ -71,6 +69,7 @@ class ContestController extends Controller
                 'name' => request()->input('name'),
                 'location' => request()->input('location'),
                 'date' => request()->input('date'),
+                'international' => request()->input('region') == 'international',
             ]);
         } catch (QueryException $e) {
             return redirect()->back()->withErrors(['name' => 'A contest with this name already exists.'])->withInput();
@@ -109,7 +108,7 @@ class ContestController extends Controller
     }
 
     // Store listing data
-    public function store(Request $request) {
+    public function store() {
         $contestRules = [
             'name' => 'required',
             'location' => 'required',
@@ -122,7 +121,7 @@ class ContestController extends Controller
         ];
 
         $rules = array_merge($contestRules, $subContestRules);
-        $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make(request()->all(), $rules);
 
         if ($validator->fails()) {
             return redirect()
@@ -134,16 +133,17 @@ class ContestController extends Controller
         // Handle duplicate entry error
         try {
             $contest = Contest::create([
-                'name' => $request->input('name'),
-                'location' => $request->input('location'),
-                'date' => $request->input('date'),
+                'name' => request()->input('name'),
+                'location' => request()->input('location'),
+                'date' => request()->input('date'),
+                'international' => request()->input('region') == 'international',
             ]);
         } catch (QueryException $e) {
             return redirect()->back()->withErrors(['name' => 'A contest with this name already exists.'])->withInput();
         }
 
-        if ($request->has('subcontests')) {
-            $subContestData = $request->input('subcontests');
+        if (request()->has('subcontests')) {
+            $subContestData = request()->input('subcontests');
 
             if (count($subContestData) !== count(array_unique($subContestData))) {
                 return redirect()->back()->withErrors(['subcontests' => 'Subcontest names must be unique.'])->withInput();
