@@ -6,13 +6,13 @@
 @import "tables";
 
 h1 {
-    @apply mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900
+    @apply mb-4 text-6xl text-center font-extrabold leading-none tracking-tight text-gray-900
             md:text-5xl lg:text-6xl dark:text-white
 }
 
 h2 {
-    @apply mb-4 text-6xl text-center font-extrabold leading-none tracking-tight text-gray-900
-            md:text-6xl lg:text-6xl dark:text-white
+    @apply mb-4 text-4xl text-center font-extrabold leading-none tracking-tight text-gray-900
+            md:text-4xl lg:text-5xl dark:text-white
 }
 
 p {
