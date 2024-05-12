@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ONI Vault</title>
+    <title>SEPI Hall Of Fame</title>
 </head>
 
 <body>
 <x-layout>
-    <h1>Bine ai venit la ONI Vault!</h1>
+    <h1>Bine ai venit la SEPI Hall Of Fame!</h1>
     <div class="flex flex-col items-center">
         {{-- Two columns div --}}
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 p-36">
@@ -17,10 +17,14 @@
             <div>
                 <p
                     class="mb-6 text-lg text-center font-normal text-gray-700 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                    Ce este ONI-Vault?
+                    Ce este <em>SEPI Hall Of Fame?</em>
                 </p>
                 <p class="mb-3 text-gray-700 dark:text-gray-400">
-                    {{ Lipsum::short()->text(3) }}
+                    <em>SEPI Hall Of Fame</em> reprezintă încercarea noastră de a păstra o istorie a concursurilor. 
+                    Aici vei găsi informații despre concursuri, comisii, participanți și rezultate românilor la concursuri naționale și internaționale precum <em>OJI</em>, <em>ONI</em> și <em>IOI</em>.
+
+                    <p>Fiecare concurs are o pagină dedicată unde poți vedea informații despre locație, dată, câștigători și multe altele.</p>
+                    <p>Fiecare participant are o pagină dedicată unde poți vedea rezultate naționale și internaționale.</p>
                 </p>
             </div>
 

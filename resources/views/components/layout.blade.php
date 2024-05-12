@@ -14,7 +14,7 @@
             document.documentElement.classList.remove('dark');
         }
     </script>
-    <title>ONI Vault</title>
+    <title>SEPI Hall Of Fame</title>
 
 </head>
 
