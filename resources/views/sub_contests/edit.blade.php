@@ -7,9 +7,9 @@
         @method('PUT')
 
         <div class="px-64 flex justify-center">
-            {{-- Nume subconcurs --}}
+            {{-- Nume grupă --}}
             <div class="w-1/3 mb-6">
-                <x-input label="Nume subconcurs" name="name" :value="$sub_contest->name"/>
+                <x-input label="Nume grupă" name="name" :value="$sub_contest->name"/>
                 @error('name')
                 <x-error-message :name="$sub_contest->name"/> @enderror
             </div>

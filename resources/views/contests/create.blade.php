@@ -45,11 +45,14 @@
             </div>
         </div>
 
-        <div id="subcontests"></div>
+        <div id="subcontests" class="px-64 justify-center"></div>
         @error('subcontests')
         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
         @enderror
-        <button type="button" id="add-subcontest-button" class="blue-button">Add a New Subcontest</button>
+
+        <div class="px-64 flex justify-center mt-12">
+            <button type="button" id="add-subcontest-button" class="blue-button">Adaugă o nouă grupă</button>
+        </div>
 
         <div class="mb-6">
             <button type="submit"
@@ -64,17 +67,33 @@
         document.addEventListener('DOMContentLoaded', function () {
             const subcontestsContainer = document.getElementById('subcontests');
             const addSubcontestButton = document.getElementById('add-subcontest-button');
-            let subcontestCount = 0;
 
             addSubcontestButton.addEventListener('click', function () {
-                ++subcontestCount;
+                const subcontestDiv = document.createElement('div');
+                subcontestDiv.classList.add('subcontest-field');
+                subcontestDiv.style.display = 'flex';
+                subcontestDiv.style.alignItems = 'center';
+                subcontestDiv.style.justifyContent = 'center';
 
-                const subcontestInput = document.createElement('div');
-                subcontestInput.innerHTML = `
-                <x-input label="Subcontest ${subcontestCount} name" name="subcontests[]" value=""/>
-            `;
-                subcontestsContainer.appendChild(subcontestInput);
+                // Create x-input element inside the div
+                const subcontestInput = document.createElement('input');
+                subcontestInput.type = 'text';
+                subcontestInput.name = 'subcontests[]';
+                subcontestInput.placeholder = 'Nume grupă (ex. Juniori/Clasa a 5-a)';
+                subcontestInput.className = 'mt-6 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500';
+                subcontestInput.required = true;
 
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'red-button mt-6';
+                deleteButton.innerText = 'X';
+                deleteButton.style.marginLeft = '10px';
+                deleteButton.addEventListener('click', function () {
+                    subcontestDiv.remove();
+                });
+
+                subcontestDiv.appendChild(subcontestInput);
+                subcontestDiv.appendChild(deleteButton);
+                subcontestsContainer.appendChild(subcontestDiv);
             });
         });
     </script>

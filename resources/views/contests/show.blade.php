@@ -17,7 +17,7 @@
                 <td>{{ $contest->international ? 'Internațional' : 'Național' }}</td>
             </tr>
             <tr>
-                <td>SubContests:</td>
+                <td>Grupe:</td>
                 <td>
                     <ul>
                         @foreach ($contest->subContests as $sub_contest)
@@ -46,8 +46,8 @@
                 @method('DELETE')
                 <button type="submit"
                         class="red-button"
-                        onclick="return confirm('Are you sure you want to delete this contest?')">
-                    Delete contest
+                        onclick="return confirm('Ești sigur că vrei să ștergi acest concurs?')">
+                    Șterge concurs
                 </button>
             </form>
         </div>
