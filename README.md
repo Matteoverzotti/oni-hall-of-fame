@@ -7,6 +7,17 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+# Set Up
+
+1. Clone the repository
+2. Copy the `.env.example` file to `.env` and update the database credentials
+3. Run `docker compose up -d --build` to start the containers
+4. Generate a new application key by running `docker exec sepi-hof php artisan key:generate`
+5. Run `docker exec sepi-hof php artisan migrate` to run the migrations
+6. Run `docker exec sepi-hof npm install` to install the dependencies
+7. Run `docker exec sepi-hof npm run build` to compile the assets
+8. Open the browser at `localhost:8000`
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
@@ -64,3 +75,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
