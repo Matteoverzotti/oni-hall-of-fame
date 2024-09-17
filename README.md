@@ -7,6 +7,9 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+> [!WARNING]  
+> This project is still in development and many things might change along the way.
+
 # Set Up
 
 1. Clone the repository
